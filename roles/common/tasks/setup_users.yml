@@ -1,0 +1,41 @@
+---
+- name: Make sure we have a 'wheel' group
+  become: true
+  group:
+    name: wheel
+    state: present
+
+- name: Allow 'wheel' group to have passwordless sudo
+  become: true
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+
+- name: Add sudoers users to wheel group
+  become: true
+  user: name=deployer groups=wheel append=yes state=present createhome=yes
+
+- name: create all the required groups
+  group:
+    name: "{{item}}"
+  with_items: "{{admin_groups.replace(' ', '').split(',')}}"
+
+- name: create all the required users
+  user:
+    name: "{{item.name}}"
+    groups: "{{admin_groups}}"
+    comment: "Imported by Ansible {{ansible_date_time.date}}"
+  with_items: "{{admin_users}}"
+  become: true
+
+- name: associate user public authorized_keys
+  authorized_key:
+    user: "{{item.0.name}}"
+    key: "{{item.1}}"
+  with_subelements:
+    - "{{admin_users}}"
+    - ssh-authorized-keys
+  become: true

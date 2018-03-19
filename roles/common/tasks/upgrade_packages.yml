@@ -1,0 +1,13 @@
+---
+- name: install base components
+  become: true
+  apt:
+    name: "{{item}}"
+  with_items:
+    - aptitude # Fix for the next step
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 86400 #One day

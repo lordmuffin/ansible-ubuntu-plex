@@ -1,0 +1,6 @@
+---
+- name: reload sshd
+  service: name=sshd state=reloaded
+- name: update motd
+  command: /usr/sbin/update-motd
+  become: true

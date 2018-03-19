@@ -1,0 +1,8 @@
+---
+
+- name: setup users
+  include: setup_users.yml
+- name: update all packages
+  include: upgrade_packages.yml
+# - name: setup motd
+#   include: setup_motd.yml
