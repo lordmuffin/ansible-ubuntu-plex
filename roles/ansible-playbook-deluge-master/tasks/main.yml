@@ -1,7 +1,7 @@
 ---
 
 - name: ensure user deluge is present
-  user: state=present name=$delugeUser system=yes shell=/bin/sh comment="Deluge Torrents"
+  user: state=present name={delugeUser} system=yes shell=/bin/sh comment="Deluge Torrents"
   become: true
   # when_boolean: $createDelugeUser
 

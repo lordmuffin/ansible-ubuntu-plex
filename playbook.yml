@@ -4,3 +4,4 @@
     - common
     - ansible.motd
     - ansible-playbook-deluge-master
+    - {role: ansible-plex-master, become: true}
