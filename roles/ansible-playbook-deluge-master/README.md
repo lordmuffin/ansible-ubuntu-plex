@@ -1,6 +1,7 @@
+Source: https://github.com/jgrowl/ansible-playbook-deluge
 # Description
 
-Easily install, configure, and manage the deluge web user interface on ubuntu 12.04 with ansible! 
+Easily install, configure, and manage the deluge web user interface on ubuntu 12.04 with ansible!
 Only tested with ubuntu server 12.04.
 
 # Installation
