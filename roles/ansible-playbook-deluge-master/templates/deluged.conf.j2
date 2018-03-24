@@ -1,0 +1,24 @@
+# deluged - Deluge daemon
+#
+# The daemon component of Deluge BitTorrent client. Deluge UI clients
+# connect to this daemon via DelugeRPC protocol.
+
+[Unit]
+Description=Deluge Bittorrent Client Daemon
+After=network-online.target
+
+[Service]
+Type=simple
+User={{delugeUser}}
+Group={{delugeGroup}}
+UMask={{daemonUmask}}
+
+ExecStart=/usr/bin/deluged -d -l /var/log/deluge/daemon.log -L warning
+
+Restart=on-failure
+
+# Configures the time to wait before service is stopped forcefully.
+TimeoutStopSec=300
+
+[Install]
+WantedBy=multi-user.target

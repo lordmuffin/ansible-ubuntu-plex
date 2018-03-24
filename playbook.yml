@@ -3,5 +3,5 @@
   roles:
     - common
     - ansible.motd
-    - ansible-playbook-deluge-master
+    - {role: ansible-playbook-deluge-master, become: true}
     - {role: ansible-plex-master, become: true}
