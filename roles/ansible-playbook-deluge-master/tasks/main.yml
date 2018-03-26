@@ -8,6 +8,9 @@
 - name: ensure user deluge is present
   user: state=present name={{delugeUser}} groups={{delugeGroup}} system=yes shell=/bin/sh comment="Deluge Torrents"
 
+- name: ensure user plex is present
+  user: state=present name={{plexUser}} groups={{delugeGroup}} system=yes shell=/bin/sh comment="Plex User"
+
 - name: Add deluge ppa key
   action: apt_repository repo=ppa:deluge-team/ppa state=present
   notify: update apt-cache
